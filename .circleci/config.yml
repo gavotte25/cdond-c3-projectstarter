@@ -51,6 +51,7 @@ jobs:
           name: Build front-end
           command: |
             # Your code here
+            pwd
             npm run build
             # exit 1
       - save_cache:
