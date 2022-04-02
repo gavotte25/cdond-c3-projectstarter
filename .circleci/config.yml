@@ -52,6 +52,7 @@ jobs:
           command: |
             # Your code here
             pwd
+            ls -l
             npm run build
             # exit 1
       - save_cache:
