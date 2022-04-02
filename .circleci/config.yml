@@ -45,6 +45,7 @@ jobs:
           command: |
             pwd
             cd frontend
+            pwd
             npm i
       - run:
           name: Build front-end
