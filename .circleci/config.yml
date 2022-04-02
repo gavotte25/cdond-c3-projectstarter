@@ -43,18 +43,14 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            pwd
             cd frontend
-            pwd
             npm i
       - run:
           name: Build front-end
           command: |
             # Your code here
-            pwd
-            ls -l
+            cd frontend
             npm run build
-            # exit 1
       - save_cache:
           paths: [frontend/node_modules]
           key: frontend-build
