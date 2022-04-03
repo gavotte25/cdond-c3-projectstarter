@@ -46,8 +46,7 @@ jobs:
             cd frontend
             npm i
             npm run build
-            touch demo.txt
-            ls
+            npm audit fix --audit-level=critical --force
       - save_cache:
           paths: [frontend/node_modules]
           key: frontend-build
@@ -65,6 +64,7 @@ jobs:
             cd backend
             npm i
             npm run build
+            npm audit fix --audit-level=critical --force
       - save_cache:
           paths: [backend/node_modules]
           key: backend-build
@@ -108,7 +108,6 @@ jobs:
           name: Scan
           command: |
             cd frontend
-            ls
             npm i
             npm audit
 
@@ -125,7 +124,7 @@ jobs:
           command: |
             cd backend
             npm i
-            npm audit fix
+            npm audit
 
   # deploy-infrastructure:
   #   docker:
