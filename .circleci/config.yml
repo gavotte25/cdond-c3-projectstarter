@@ -8,8 +8,8 @@ commands:
           name: Destroy environments
           when: on_fail
           command: |
-            aws cloudformation delete-stack --stack-name back-end-${CIRCLE_WORKFLOW_ID} \
-            # aws cloudformation delete-stack --stack-name front-end-${CIRCLE_WORKFLOW_ID}
+            aws cloudformation delete-stack --stack-name back-end-${CIRCLE_WORKFLOW_ID}
+            aws cloudformation delete-stack --stack-name front-end-${CIRCLE_WORKFLOW_ID}
 
   revert-migrations:
     description: Revert the last migration if successfully run in the current workflow.
@@ -166,7 +166,7 @@ jobs:
     steps:
       - checkout
       - add_ssh_keys:
-          fingerprints:	["16:1a:3b:87:3d:89:5c:af:00:b3:19:5c:0c:9e:de:ae"]
+          fingerprints: ["16:1a:3b:87:3d:89:5c:af:00:b3:19:5c:0c:9e:de:ae"]
       - attach_workspace:
           at: ~/project/.circleci/ansible/inventory.txt
       - run:
