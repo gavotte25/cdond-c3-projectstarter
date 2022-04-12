@@ -178,10 +178,11 @@ jobs:
       - run:
           name: Install ansible
           command: |
-            apk add --update ansible
+            apk add --update curl
             curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
             unzip awscliv2.zip
-            sudo ./aws/install
+            ./aws/install
+            apk add --update ansible
       # - attach_workspace:
       #     at: ~/project/.circleci/ansible
       # - run:
