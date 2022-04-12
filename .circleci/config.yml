@@ -179,16 +179,9 @@ jobs:
           name: Install ansible
           command: |
             apk add --update curl
-            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+            curl "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o "awscliv2.zip"
             unzip awscliv2.zip
-            ls
-            pwd
             ./aws/install
-            cd aws
-            ls
-            pwd
-            cd dist
-            pwd
             aws --version
             apk add --update ansible
       # - attach_workspace:
