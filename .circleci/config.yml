@@ -177,7 +177,8 @@ jobs:
       - run:
           name: Instal dependencies
           command: |
-            pip3 install ansible
+            python3 --version
+            pip install ansible
             ansible --version | grep "python version"
             curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
             unzip awscliv2.zip
