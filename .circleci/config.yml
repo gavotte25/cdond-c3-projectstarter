@@ -162,7 +162,7 @@ jobs:
 
   configure-infrastructure:
     docker:
-      - image: python:3.7-alpine3.11
+      - image: cimg/base:2022.03
     steps:
       - checkout
       - add_ssh_keys:
@@ -174,17 +174,24 @@ jobs:
       #       yum install -y tar gzip
       #       yum install -y python3
       #       pip3 install ansible
-            
       - run:
-          name: Install ansible
+          name: Instal dependencies
           command: |
-            apk add --update curl
-            apk add gcompat
+            pip3 install ansible
+            ansible --version | grep "python version"
             curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
             unzip awscliv2.zip
-            ./aws/install -i /usr/local/aws-cli -b /usr/local/bin
-            aws --version
-            apk add --update ansible
+            ./aws/install   
+      # - run:
+      #     name: Install ansible
+      #     command: |
+      #       apk add --update curl
+      #       apk add gcompat
+      #       curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+      #       unzip awscliv2.zip
+      #       ./aws/install -i /usr/local/aws-cli -b /usr/local/bin
+      #       aws --version
+      #       apk add --update ansible
       # - attach_workspace:
       #     at: ~/project/.circleci/ansible
       # - run:
