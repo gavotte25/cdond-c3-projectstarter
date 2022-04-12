@@ -168,15 +168,18 @@ jobs:
       - add_ssh_keys:
           fingerprints: ["16:1a:3b:87:3d:89:5c:af:00:b3:19:5c:0c:9e:de:ae"]
       - run:
-          name: Install tar
+          name: Install dependencies
           command: |
+            yum update
             yum install -y tar gzip
-      - run:
-          name: Install ansible
-          command: |
-            cd .circleci/ansible
-            cat inventory.txt
-            apk add --update ansible
+            yum install ansible
+            
+      # - run:
+      #     name: Install ansible
+      #     command: |
+      #       cd .circleci/ansible
+      #       cat inventory.txt
+      #       apk add --update ansible
       - attach_workspace:
           at: ~/project/.circleci/ansible
       - run:
