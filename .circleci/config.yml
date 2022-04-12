@@ -172,7 +172,8 @@ jobs:
           command: |
             yum update
             yum install -y tar gzip
-            yum install -y python-pip
+            yum install -y python3
+            yum install -y python3-pip
             pip install ansible
             
       # - run:
