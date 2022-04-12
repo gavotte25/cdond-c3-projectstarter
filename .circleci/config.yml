@@ -172,7 +172,7 @@ jobs:
           command: |
             yum update
             yum install -y tar gzip
-            yum install python-pip
+            yum install -y python-pip
             pip install ansible
             
       # - run:
@@ -186,6 +186,8 @@ jobs:
       - run:
           name: Configure server
           command: |
+            cd .circleci/ansible
+            cat inventory.txt
             ansible-playbook -i inventory.txt configure_server.yml
       - destroy-environment  
 
