@@ -187,6 +187,9 @@ jobs:
             cd aws
             ls
             pwd
+            cd dist
+            pwd
+            aws --version
             apk add --update ansible
       # - attach_workspace:
       #     at: ~/project/.circleci/ansible
