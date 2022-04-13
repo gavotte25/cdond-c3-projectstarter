@@ -155,10 +155,15 @@ jobs:
             --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID}" \
             --output text >> .circleci/ansible/inventory.txt 
             cat .circleci/ansible/inventory.txt 
+            aws ec2 describe-instances \
+            --query 'Reservations[*].Instances[*].PublicIpAddress' \
+            --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID}" \
+            --output text >> .circleci/ansible/inventory2.txt 
       - persist_to_workspace:
-          root: ~
+          root: ~/
           paths:
             - project/.circleci/ansible/inventory.txt
+            - project/.circleci/ansible/inventory2.txt
       - destroy-environment
 
   configure-infrastructure:
@@ -188,6 +193,7 @@ jobs:
             cd .circleci/ansible
             ls -a
             cat inventory.txt
+            cat inventory2.txt
             # ansible-playbook -i inventory.txt configure_server.yml
       # - destroy-environment  
 
