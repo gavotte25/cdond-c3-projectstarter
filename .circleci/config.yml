@@ -154,6 +154,7 @@ jobs:
             --query 'Reservations[*].Instances[*].PublicIpAddress' \
             --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID}" \
             --output text >> .circleci/ansible/inventory.txt 
+            cat .circleci/ansible/inventory.txt 
       - persist_to_workspace:
           root: ~/
           paths:
@@ -183,9 +184,9 @@ jobs:
           name: Configure server
           command: |
             pwd
-            ls
+            ls -a
             cd .circleci/ansible
-            ls
+            ls -a
             cat inventory.txt
             # ansible-playbook -i inventory.txt configure_server.yml
       # - destroy-environment  
