@@ -156,9 +156,9 @@ jobs:
             --output text >> .circleci/ansible/inventory.txt 
             cat .circleci/ansible/inventory.txt 
       - persist_to_workspace:
-          root: ~/
+          root: ~
           paths:
-            - project/.circleci/ansible
+            - project/.circleci/ansible/inventory.txt
       - destroy-environment
 
   configure-infrastructure:
@@ -179,7 +179,7 @@ jobs:
             # sudo ./aws/install
             # aws --version
       - attach_workspace:
-          at: ~/project/.circleci/ansible
+          at: ~/project/.circleci/ansible/
       - run:
           name: Configure server
           command: |
