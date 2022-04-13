@@ -139,14 +139,14 @@ jobs:
               --tags project=project3 \
               --stack-name "back-end-${CIRCLE_WORKFLOW_ID}" \
               --parameter-overrides ID="$CIRCLE_WORKFLOW_ID"  
-      # - run:
-      #     name: Ensure front-end infrastructure exist
-      #     command: |
-      #       aws cloudformation deploy \
-      #         --template-file .circleci/files/frontend.yml \
-      #         --tags project=project3 \
-      #         --stack-name "front-end-${CIRCLE_WORKFLOW_ID}" \
-      #         --parameter-overrides ID="$CIRCLE_WORKFLOW_ID"  
+      - run:
+          name: Ensure front-end infrastructure exist
+          command: |
+            aws cloudformation deploy \
+              --template-file .circleci/files/frontend.yml \
+              --tags project=project3 \
+              --stack-name "front-end-${CIRCLE_WORKFLOW_ID}" \
+              --parameter-overrides ID="$CIRCLE_WORKFLOW_ID"  
       - run:
           name: Add back-end ip to ansible inventory
           command: |
@@ -174,23 +174,18 @@ jobs:
             sudo apt update
             sudo apt install -y python3-pip
             pip3 install ansible
-            # curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-            # unzip awscliv2.zip
-            # sudo ./aws/install
-            # aws --version
+            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+            unzip awscliv2.zip
+            sudo ./aws/install
+            aws --version
       - attach_workspace:
-          at: ~/project/.circleci/ansible/
+          at: ~/
       - run:
           name: Configure server
           command: |
-            pwd
-            ls -a
             cd .circleci/ansible
-            ls -a
-            cd project/.circleci/ansible/
-            cat inventory.txt
-            # ansible-playbook -i inventory.txt configure_server.yml
-      # - destroy-environment  
+            ansible-playbook -i inventory.txt configure_server.yml
+      - destroy-environment  
 
   # run-migrations:
   #   docker:
